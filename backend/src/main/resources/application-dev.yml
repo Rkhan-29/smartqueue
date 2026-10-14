@@ -1,0 +1,19 @@
+# Development profile. Activate with SPRING_PROFILES_ACTIVE=dev
+spring:
+  datasource:
+    password: ${DB_PASSWORD:smartqueue}
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    com.smartqueue: DEBUG
+
+smartqueue:
+  jwt:
+    # DEV ONLY fallback so the app starts locally. Never use in production.
+    secret: ${JWT_SECRET:dev-only-secret-change-me-dev-only-secret-change-me-0123456789}
+  seed:
+    # Creates DEMO data and DEMO credentials. Development only.
+    enabled: true
+    demo-password: ${DEMO_PASSWORD:ChangeMe#Demo1}

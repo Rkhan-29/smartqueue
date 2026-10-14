@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-[17px] leading-relaxed text-ink antialiased;
+    font-feature-settings: 'tnum' 1;
+  }
+  h1, h2, h3 {
+    @apply font-display font-bold leading-[1.05] tracking-tight;
+  }
+  :focus-visible {
+    @apply outline outline-[3px] outline-offset-2 outline-info;
+  }
+  button, [role='button'] {
+    touch-action: manipulation;
+  }
+}
+
+@layer components {
+  /* Ticket stub: notches cut at the perforation, dashed tear line */
+  .ticket {
+    --notch: 13px;
+    --split: 68%;
+    -webkit-mask:
+      radial-gradient(circle var(--notch) at 0 var(--split), #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% var(--split), #0000 98%, #000) right / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle var(--notch) at 0 var(--split), #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% var(--split), #0000 98%, #000) right / 51% 100% no-repeat;
+  }
+  .tear {
+    background-image: repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 14px);
+    height: 2px;
+    opacity: 0.35;
+  }
+  /* Amber call-board digits */
+  .led {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  .field {
+    @apply w-full rounded border-[1.5px] border-ink-400 bg-paper-100 px-3.5 py-3 text-[17px] text-ink placeholder:text-ink-300 focus:border-ink focus:bg-surface;
+  }
+  .field-error {
+    @apply border-stop;
+  }
+  .table-th {
+    @apply whitespace-nowrap px-4 py-3 text-left text-sm font-semibold text-ink-500;
+  }
+  .table-td {
+    @apply px-4 py-3 align-middle text-[15px];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+}
